@@ -1,0 +1,7 @@
+tạo các controller
+1.categories (list,item)
+2.products (list,item)
+3.orders (list,item)
+3.cart (list)
+tạo các view tương ứng như trên
+

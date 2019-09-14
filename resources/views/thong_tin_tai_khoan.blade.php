@@ -1,0 +1,1 @@
+<h1>Xin chao {{$name}} {{$ngay_sinh}}</h1>
