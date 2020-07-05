@@ -119,4 +119,10 @@ class UserController extends Controller
             return redirect('admin/dang-nhap');
         }
     }
+    public function getDelUser($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect('admin/user/danh-sach');
+    }
 }

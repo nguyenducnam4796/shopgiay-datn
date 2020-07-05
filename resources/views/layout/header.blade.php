@@ -115,7 +115,7 @@
 	<!-- top-bar -->
 	<div class="row clearfix" id="header-logo">
 		<div class='col-12 col-sm-12 col-md-6 col-lg-6 ' id='header-logo-left'>
-			<p class='p-logo'><a href="">ShopGiay</a></p>
+			<p class='p-logo'><a href="">Shoes Shop</a></p>
 		</div>
 
 		<div class='col-12 col-sm-12 col-md-6 col-lg-6 header-right'>

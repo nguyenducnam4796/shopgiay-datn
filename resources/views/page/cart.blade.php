@@ -70,7 +70,7 @@
 						<span class='span__total_price'>{{number_format($total_price)}} vnđ</span>
 					</p>
 					<div class='cart-bottom-footer'>
-						<a href="thanh-toan" class='btn__link btn__link-cart'>Thanh toán</a>
+						<a href="thanh-toan" class='btn__link btn__link-cart'>Đặt hàng</a>
 	    				<a href="" class='btn__link btn__link-cart'>Tiếp tục mua hàng</a>
 					</div>
 				</div>

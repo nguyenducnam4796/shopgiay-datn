@@ -14,10 +14,6 @@
 				<nav class="breadcrumb-nav small--text-center">
 					<a href="{{ route('trang-chu') }}">Home</a>
 					<span class="breadcrumb-nav__separator" aria-hidden="true">›</span>
-					@if(count($cates_parent) > 0)
-					<a href="danh-muc/{{$cates_parent->id}}/{{$cates_parent->slug_name}}.html">{{$cates_parent->name}}</a>
-					<span class="breadcrumb-nav__separator" aria-hidden="true">›</span>
-					@endif
 					<a href="danh-muc/{{$cates->id}}/{{$cates->slug_name}}.html">{{$cates->name}}</a>
 				    <span class="breadcrumb-nav__separator" aria-hidden="true">›</span>
 				    <a href="san-pham/{{$product->id}}/{{$product->slug_name}}.html">{{$product->name}}</a>	
@@ -25,7 +21,6 @@
 
 				<div class='block_wrap row product-single'>
 					<div class="col-12 col-sm-12 col-md-7 col-lg-6 product-single__block-left" >
-						<span class="badge badge--sale"><span>Sale</span></span>
 						<img id='img_01' class="img-view" src="uploaded/product/{{$product->image_product}}" data-zoom-image='uploaded/product/{{$product->image_product}}'/>
 							<div id="gallery_01">
 							 	@if(count($image_products) > 0)
@@ -74,7 +69,7 @@
 							</div>
 						</div>
 
-						<p class='amount-remain'>Còn lại <span id='amount'></span> sản phẩm trong kho</p>
+						<p class='amount-remain'>Còn lại <b><span id='amount'></span></b> sản phẩm trong kho</p>
 
 						<div class="product-submit-cart">
 							<span class='a__submit'>
@@ -143,16 +138,17 @@
 					    <!--modal-content-->
 					  </div>
 					</div>
-					<!--end-bootstrap-modal-->	
-				
+					<!--end-bootstrap-modal-->
 				<div class='product-description'>
 					{!!$product->detail!!}
 				</div>
 				<hr class="hr--border-top small-hidden"></hr>
+				<div class='title-heading col-12'>
+					<h5>Sản phẩm cùng loại</h5>
+				</div>
 				<div class='product--different block_wrap row'>
 					@if(count($diff_products) > 0)
 					@foreach($diff_products as $diff_product)
-
 					<div class="product-item">
 					    <div class="thumbnail">
 					    	@if($diff_product->promotion_price > 0 )

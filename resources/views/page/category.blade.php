@@ -42,10 +42,10 @@
 						@foreach($sizes as $size)
 	            			<input type="checkbox"  value="{{$size->id}}" id='size-{{$size->id}}' class="item-filter size filter-size-{{$size->id}}">
 		            		<label for="size-{{$size->id}}">{{$size->name}}</label>
-						@endforeach     
+						@endforeach
 					@endif
 				</div>
-			</div>		
+			</div>
 		</div>
 		<div class="col-12 col-sm-12 col-md-10 col-lg-10 block-main-content">
 			<div class='main-content'>
@@ -90,16 +90,16 @@
 			</div>
 			<!--end-grid-->
 			<div class='block_wrap row' id="pd">
-				
+
 					<div class="row filter-tag">
 					</div>
-					<div class="page_info"> 	
+					<div class="page_info">
 						<p class="p__total_item">@if(count($products) > 0) Hiển thị: <span>{{ $products->firstItem() }}</span> - <span>{{ $products->lastItem() }}</span> trong @endif <span>{{ $products->total()}}</span> sản phẩm</p>
 					</div>
-					
+
 					@if(count($products) > 0 )
-					<div class="row clearfix" style="width: 100%;" id="list_product"> 
-						@foreach($products as $product) 
+					<div class="row clearfix" style="width: 100%;" id="list_product">
+						@foreach($products as $product)
 					  	<div class="product-item">
 							<div class="thumbnail">
 								@if($product->promotion_price > 0 )
@@ -125,15 +125,15 @@
 					  	</div>
 
 			  			@endforeach
-			  		</div>	
+			  		</div>
 			  			<div class="block_center block_paginate">
 			  				{{$products->links()}}
 			  			</div>
-			  	
+
 				  	@else
 				  		<p class="text-center messages">Không có sản phẩm phù hợp!</p>
 				  	@endif
-			  
+
 			</div>
 			<!--block_wrap-->
 		</div>
@@ -150,7 +150,7 @@
 @endsection
 @section('script')
 	<script type="text/javascript">
-		
+
 		$(document).ready(function (){
 			var cate_id  = $(".options__checkbox").attr('data-cate-id');
 			var data = {
@@ -185,13 +185,13 @@
 				var brand_list  = new Array();
 				var size_list   = new Array();
 				var price_list   = new Array();
-				brand_list      = multi_checkbox('brand'); 
+				brand_list      = multi_checkbox('brand');
 				size_list       = multi_checkbox('size');
 				price_list       = multi_checkbox('price');
-				data.page       = 1; 				
-				data.brand_list = brand_list;  
+				data.page       = 1;
+				data.brand_list = brand_list;
 				data.size_list  = size_list;
-				data.price_list = price_list;	
+				data.price_list = price_list;
 				ajax();
 			});
 
@@ -231,7 +231,7 @@
 					errors:function (){
 						alert('fasle');
 					}
-				});	
+				});
 			}
 			//lấy danh sach checkbox
 			function multi_checkbox(class_check){

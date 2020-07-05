@@ -15,8 +15,6 @@
  */
 
 
-
-
 Route::get('/user/dang-ky',['as'=>'dang-ky','uses'=>'PageController@dang_ky']);
 Route::post('/user/dang-ky',['as'=>'dang-ky','uses'=>'PageController@gui_dang_ky']);
 

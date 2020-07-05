@@ -31,7 +31,7 @@
                             <label>Danh mục cha</label>
                             <select class="form-control" name="selectCateID">
                                 <?php 
-                                $cate_id = $product->cate_id; 
+                                $cate_id = $product->cate_id;
                                 listcate($cates, 0, $str = "", $cate_id ) ?>
                             </select>
                         </div>
@@ -78,7 +78,7 @@
                             </label>
                         </div>
                     <button type="submit" class="btn btn-default" name='ok'>Lưu lại</button>
-                    <button type="reset" class="btn btn-default">Reset</button>
+                    <button type="reset" class="btn btn-default">Hủy</button>
                 </div>
                 <div class="col-lg-5" >
 
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                  {{csrf_field()}}
-                <form>
+                </form>
                     <div>
                         <h4>Danh sách hình ảnh</h4>
                         <div id="list-image">
@@ -115,8 +115,7 @@
                             @endforeach 
                         </div>
                     </div>
-                    
-                <div style="border-top: 1px solid #ccc; padding: 15px 0px;"><a type="button" href="admin/san-pham/size/them/{{$product->id}}" class="btn btn-primary">Thêm Size</a>
+                    <div style="border-top: 1px solid #ccc; padding: 15px 0px;"><a type="button" href="admin/san-pham/size/them/{{$product->id}}" class="btn btn-primary">Thêm Size</a>
                     </div>
                     <div style="border-top: 1px solid #ccc; padding-top: 10px;">
                         <h4>Danh sách size</h4>
@@ -142,7 +141,6 @@
                         </table>
                     </div>
                 </div>
-                
             </div>
             <!-- /.row -->
         </div>

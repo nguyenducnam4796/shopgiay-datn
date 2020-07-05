@@ -95,7 +95,7 @@
 				<!--step__sections-->
 				<div class="step__footer">
 					<div class="text-right ">
-						<button  type='submit' name='submit' class="btn__link btn__checkout btn__no-margin-right" @if(Cart::count()==0) id='submit-false' @endif >Thanh Toán</button>
+						<button  type='submit' name='submit' class="btn__link btn__checkout btn__no-margin-right" @if(Cart::count()==0) id='submit-false' @endif >Đặt hàng</button>
 					</div>
 				</div>
 				  {{ csrf_field() }}
@@ -230,7 +230,7 @@
 					data: 'coupon='+coupon,
 					async: true,
 					beforeSend:function (){
-						$('.btn__add-coupon').html('Áp dụng <i class="fa fa-circle-o-notch" aria-hidden="true"></i>');
+						$('.btn__add-coupon').html('Áp dụng <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>');
 					},
 					success: function (data)
 					{
@@ -257,5 +257,5 @@
 	</script>
 @endsection
 @section('title')
-	Thanh toán
+	Đặt hàng
 @endsection

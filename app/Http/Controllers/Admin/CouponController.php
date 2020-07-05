@@ -59,7 +59,7 @@ class CouponController extends Controller
     	$coupon->value = $request->txtCouponValue;
     	$coupon->save();
 
-    	return redirect('admin/coupon/sua/'.$id)->with('message','Sửa thành công');
+    	return redirect('admin/coupon/danh-sach')->with('message','Sửa thành công');
     }
 
     public function getDelCoupon($id)

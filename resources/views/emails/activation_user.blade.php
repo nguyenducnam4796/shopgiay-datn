@@ -8,5 +8,5 @@ Kích hoạt
 @endcomponent
 
 Thanks,<br>
-trung
+Nam
 @endcomponent

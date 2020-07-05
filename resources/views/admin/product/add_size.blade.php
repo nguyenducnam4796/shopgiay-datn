@@ -78,12 +78,13 @@
                             <button type="reset" class="btn btn-default">Hủy</button>
                             <a href="admin/san-pham/sua/{{$product->id}}" class="btn btn-default">Trở về</a>
                             {{csrf_field()}}
-                        <form>
+                        </form>
+                        </div>
                     </div>
-                </div>
                 <!-- /.row -->
-            </div>
+                </div>
             <!-- /.container-fluid -->
-        </div>
+            </div>
         <!-- /#page-wrapper -->
+        </div>
 @endsection

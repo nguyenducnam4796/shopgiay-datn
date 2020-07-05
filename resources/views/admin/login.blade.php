@@ -47,12 +47,6 @@
                           {{csrf_field()}}
 
                     </form>
-                    <div>
-                        <ul>
-                            <li>User:admin@gmail.com</li>
-                            <li>pass:123456</li>
-                        </ul>
-                    </div>
                     <div style="clear:both"></div>
                         @if(count($errors)>0)
                             <div class="alert alert-danger">

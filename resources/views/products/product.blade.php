@@ -1,1 +1,1 @@
-hello detail product {{$product_id}}
+{{$product_id}}

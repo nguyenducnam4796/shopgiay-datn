@@ -99,7 +99,7 @@
                                 
                             </div>
                     {{csrf_field()}}
-                    <form>
+                    </form>
                 </div>
                 <!-- /.row -->
             </div>

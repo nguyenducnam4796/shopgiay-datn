@@ -47,5 +47,5 @@ Bạn đã mua sản phẩm của chúng tôi, thông tin chi tiết đơn hàng
 
    
 Thanks,<br>
- trung
+ Nam
 @endcomponent

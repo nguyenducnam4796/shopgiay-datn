@@ -1,3 +1,4 @@
 <div id='footer' class="">
-	cuongnd@1/2018
+	<p>Nguyễn Đức Nam</p>
+	<p>Msv: 1405476</p>
 </div>

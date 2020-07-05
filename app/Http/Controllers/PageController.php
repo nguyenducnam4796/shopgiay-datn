@@ -55,12 +55,6 @@ class PageController extends Controller
     
     	return view('page.index',compact('new_product','sale_product'));
     }
-    public function guiThongTin(Request $request)
-    {
-        $full_name=$request->full_name;
-        echo $full_name;
-        return "hell0 33333333";
-    }
     public function getCategory($id, Request $request)
     {   
         $cate = Category::find($id);
