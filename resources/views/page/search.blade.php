@@ -1,19 +1,9 @@
 @extends('layout.master')
-
-@section('stylesheet')
-    <style type="text/css">
-        .mark, mark {
-            padding: 0;
-            background-color: orange;
-        }
-    </style>
-@endsection
-
 @section('content')
     <div id='wrapper'>
         <div class="row">
-			{{-- Sidebar --}}
-			@include('layout.product_sidebar')
+            {{-- Sidebar --}}
+            @include('layout.product_sidebar')
 
             <div class="col-12 col-sm-12 col-md-10 col-lg-10 block-main-content">
                 <div class='main-content'>
@@ -32,12 +22,12 @@
                     <div class="grid">
                         <div class='row'>
                             <div class='col-12 col-sm-12 col-md-6 col-lg-6  small--text-center grid__item'>
-                                <h5>{{$cate->name}}</h5>
+                                <h5>dsdsadsa</h5>
                             </div>
                             <div class='col-12 col-sm-12 col-md-6 col-lg-6  small--text-center collection-sorting grid__item medium-up--two-thirds'>
                                 <div class="collection-sorting__dropdown">
                                     <label for="SortBy" class="label--hidden">Sort by</label>
-                                    <select id="SortBy">
+                                    <select name="SortBy" id="SortBy" data-cate-id='{{$cate_id}}'>
                                         <option value="price-ascending">Giá tăng dần</option>
                                         <option value="price-descending">Giá giảm dần</option>
                                         <option value="created-descending">Mới nhất</option>
@@ -58,63 +48,24 @@
                     </div>
                     <!--end-grid-->
                     <div class='block_wrap row' id="pd">
-
                         <div class="row filter-tag">
                         </div>
                         <div class="page_info">
                             <p class="p__total_item">
-                                @if(count($products) > 0)
-                                    Hiển thị:
-                                    <span>{{ $products->firstItem() }}</span>
-                                    -
-                                    <span>{{ $products->lastItem() }}</span>
-                                    trong
-                                @endif
-                                <span>{{ $products->total()}}</span> sản phẩm
+                                Total
+                                {{--@if(count($products) > 0) Hiển thị:
+                                <span>{{ $products->firstItem() }}</span> - <span>{{ $products->lastItem() }}</span>
+                                trong @endif <span>{{ $products->total()}}</span> sản phẩm--}}
                             </p>
                         </div>
 
                         @if(count($products) > 0 )
                             <div class="row clearfix" style="width: 100%;" id="list_product">
-                                @foreach($products as $product)
-                                    <div class="product-item">
-                                        <div class="thumbnail">
-                                            @if($product->promotion_price > 0 )
-                                                <span class="badge badge--sale"><span>Sale</span></span>
-                                            @endif
-                                            @if($product->new == 1 )
-                                                <span class="badge badge--new"><span>New</span></span>
-                                            @endif
-                                            <a href="san-pham/{{$product->id}}/{{$product->slug_name}}.html"><img
-                                                        src="uploaded/product/{{$product->image_product}}"
-                                                        alt="..."></a>
-                                            <div class="product-caption text-left">
-                                                <p class='product-title'><a
-                                                            href="san-pham/{{$product->id}}/{{$product->slug_name}}.html">{{$product->name}}</a>
-                                                </p>
-                                                <p class='product-price'>
-                                                    @if($product->promotion_price > 0 )
-                                                        <span class="product__price-on-sale">{{number_format($product->promotion_price)}}</span>
-                                                        <s class="product__price--compare">{{number_format($product->unit_price)}}</s>
-                                                        vnđ
-                                                    @else
-                                                        <span> {{number_format($product->unit_price)}}</span> vnđ
-                                                    @endif
-                                                </p>
-                                                <p class='product-btn__p'><a
-                                                            href="san-pham/{{$product->id}}/{{$product->slug_name}}.html"
-                                                            class="product-btn__a" role="button"><span
-                                                                class="glyphicon glyphicon-search"></span> Chi tiết</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                @endforeach
                             </div>
-                            <div class="block_center block_paginate">
+                            {{--<div class="block_center block_paginate">
                                 {{$products->links()}}
-                            </div>
+                            </div>--}}
 
                         @else
                             <p class="text-center messages">Không có sản phẩm phù hợp!</p>
@@ -131,17 +82,11 @@
     </div>
     <!--end-wrapper-->
 @endsection
-@section('title')
-    {{$cate->name}}
-@endsection
+@section('title', 'Tìm kiếm')
 @section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js"></script>
-
     <script type="text/javascript">
-        $(document).ready(function () {
-            /*== Text mark when search ==*/
-            $(".product-title, .product-price").mark("{{request()->keyword}}");
 
+        $(document).ready(function () {
             var cate_id = $(".options__checkbox").attr('data-cate-id');
             var data = {
                 cate_id: cate_id,

@@ -45,11 +45,27 @@ Route::get('dang-xuat','PageController@getDangXuat');
 
 Route::get('kich-hoat/token/{token}',['as'=>'activation','uses'=>'PageController@getActivationUser']);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::group(['prefix'=>'user','middleware'=>'userLogin'], function (){
 	Route::get('profile',['as'=>'user.profile', 'uses'=>'PageController@getUserProfile']);
 
 	Route::post('profile',['as'=>'user.profile', 'uses'=>'PageController@postEditProfile']);
-	
+
 	Route::get('password',['as'=>'get.password', 'uses'=>'PageController@getChangePassword']);
 
 	Route::post('password',['as'=>'post.password', 'uses'=>'PageController@postChangePassword']);
@@ -95,7 +111,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin']
 	});
 
 	Route::group(['prefix'=>'san-pham'],function () {
-		
+
 		Route::get("them",['as'=>'themsanpham','uses'=>'ProductController@getAddProduct']);
 
 		Route::post("them",['as'=>'themsanpham','uses'=>'ProductController@postAddProduct']);
@@ -190,11 +206,11 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin']
 	Route::group(['prefix'=>'thong-ke'], function (){
 
 		Route::get('doanh-thu','StatisticsController@getRevenue');
-		
+
 	});
 
 	Route::post('ajax/report-date',['as'=>'admin.ajax.report_date','uses'=>'StatisticsController@postReportDate']);
-	
+
 	Route::post('ajax/view-size',"ProductController@postAjaxViewSize");
 
 	Route::post('ajax/del-image',"ProductController@postAjaxDelImage");

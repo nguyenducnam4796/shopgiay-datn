@@ -22,7 +22,8 @@
     <link href="admin_asset/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- DataTables CSS -->
-    <link href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
+    {{--<link href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">--}}
+    {{-- Không cần CSS này vì nó bị xung đột với sb-admin-2.css, dẫn đến có 2 icon sort ở thead --}}
 
     <link rel="stylesheet" type="text/css" href="css/adminstyle.css">
 
