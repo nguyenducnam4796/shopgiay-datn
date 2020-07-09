@@ -74,15 +74,12 @@ class PageController extends Controller
 
         $products = Product::whereIn('cate_id', $cateIds);
 
+        /* Search product when the keyword is not empty */
         if (!empty($keyword = $request->keyword)) {
             $products = $products->where('name', 'LIKE', "%{$keyword}%")
                 ->orWhere('promotion_price', 'LIKE', "{$keyword}%")
                 ->orWhere('unit_price', 'LIKE', "{$keyword}%");
         }
-
-
-
-
 
         $products = $products->paginate(8);
 
