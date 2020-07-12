@@ -1,14 +1,27 @@
 <?php
 
 namespace App;
-use Laravel\Scout\Searchable;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
     protected $table = "product";
 
-    use Searchable;
+    protected $fillable = [
+        'cate_id',
+        'brand_id',
+        'name',
+        'image_product',
+        'slug_name',
+        'meta_name',
+        'description',
+        'detail',
+        'unit_price',
+        'promotion_price',
+        'new',
+        'created_at',
+    ];
 
     public function category()
     {

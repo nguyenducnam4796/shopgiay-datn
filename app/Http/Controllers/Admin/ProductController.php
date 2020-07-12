@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -13,8 +14,8 @@ use App\Product;
 use App\ImageProduct;
 use DateTime;
 use File;
-use Carbon\Carbon;
 use App\ProductProperties;
+
 class ProductController extends Controller
 {
     public function getAddProduct()
@@ -36,57 +37,78 @@ class ProductController extends Controller
             "txtHinh.image"        => "Bạn cần chọn hình ảnh",
             "txtHinh.required"     => "Bạn chưa chọn hình đại diện",
         ]);
-    	$product = new Product;
-        $product->cate_id         = $request->selectParentId;
-        $product->brand_id        = $request->selectBrandId;
-        $product->name            = $request->txtName;
-        $product->slug_name       = str_slug($request->txtName,"-");
-        $product->meta_name       = unicode_convert_for_regex($request->txtName);
-        $product->description     = $request->txtDescription;
-        $product->detail          = $request->txtDetail;
-        $product->unit_price      = $request->txtUnitPrice;
-        $product->promotion_price = $request->txtPromoPrice; 
-        $product->new             = $request->rdoNew;
-        $product->created_at      = new DateTime;
-        $allowed = array('image/jpg','image/png','image/jpeg');
-        if($request->hasFile('txtHinh')){
-            $hinh      = $request->file('txtHinh');
-            $ext_image = $hinh->getClientOriginalExtension();
-            $renamed_h = uniqid('_anh',true). "." .$ext_image;
-            if(in_array($hinh->getClientMimeType(),$allowed)){
-                if($hinh->move('uploaded/product',$renamed_h)){
-                $product->image_product   = $renamed_h;
-                }
-            }
-        }
-        if($product->save()){
-            $max_id = Product::max('id');
-            if($request->hasFile('hinh'))
-            {
-                
-                foreach($request->file('hinh') as $file){
 
-                    $product_image = new ImageProduct;
-                    $ext = $file->getClientOriginalExtension();
-                    $renamed = uniqid('_anh',true). "." .$ext;
+        DB::beginTransaction();
+        try {
+            $dataSave = [
+                'cate_id'         => $request->selectParentId,
+                'brand_id'        => $request->selectBrandId,
+                'name'            => $request->txtName,
+                'slug_name'       => str_slug($request->txtName,"-"),
+                'meta_name'       => unicode_convert_for_regex($request->txtName),
+                'description'     => $request->txtDescription,
+                'detail'          => $request->txtDetail,
+                'unit_price'      => $request->txtUnitPrice,
+                'promotion_price' => $request->txtPromoPrice,
+                'new'             => $request->rdoNew,
+                'created_at'      => Carbon::now()
+            ];
 
-                    if(in_array($file->getClientMimeType(),$allowed)){
-                        if($file->move('uploaded/product',$renamed)){
-                            $product_image->name       = $renamed;
-                            $product_image->product_id = $max_id;
-                            $product_image->created_at = new DateTime;
-                            $product_image->save();
-                        }
+            $allowed = array('image/jpg','image/png','image/jpeg');
+            if($request->hasFile('txtHinh')) {
+                $hinh      = $request->file('txtHinh');
+                $ext_image = $hinh->getClientOriginalExtension();
+                $renamed_h = uniqid('_anh',true). "." .$ext_image;
+                if(in_array($hinh->getClientMimeType(),$allowed)){
+                    if($hinh->move('uploaded/product',$renamed_h)){
+                        $dataSave['image_product']   = $renamed_h;
                     }
                 }
             }
-            
+
+            $productCreate = Product::create($dataSave);
+
+            if($productCreate) {
+                $max_id = Product::max('id');
+                if ($request->hasFile('hinh')) {
+                    $imgSave = [];
+
+                    foreach($request->file('hinh') as $file) {
+                        $ext = $file->getClientOriginalExtension();
+                        $renamed = uniqid('_anh',true). "." .$ext;
+
+                        if (!in_array($file->getClientMimeType(), $allowed)) {
+                            continue;
+                        }
+
+                        if(!$file->move('uploaded/product', $renamed)) {
+                            continue;
+                        }
+
+                        $imgSave[] = [
+                            'name' => $renamed,
+                            'product_id' => $max_id,
+                            'created_at' => Carbon::now(),
+                        ];
+                    }
+
+                    ImageProduct::insert($imgSave);
+                }
+
+            }
+            DB::commit();
+            return redirect("admin/san-pham/danh-sach")
+                ->with("message","Thêm sản phẩm thành công");
+        } catch(\Exception $e) {
+            logger($e->getMessage());
+            DB::rollback();
+            return redirect("admin/san-pham/them")
+                ->with("error","Đã xảy ra lỗi máy chủ cục bộ. Vui lòng thử lại.");
         }
-        return redirect("admin/san-pham/them")->with("message","Thêm sản phẩm thành công");
     }
     public function getListProduct()
     {
-        $products = Product::orderBy('id','DESC')->get();
+        $products = Product::orderBy('id','desc')->get();
       
         return view('admin.product.list_product',compact('products'));
     }

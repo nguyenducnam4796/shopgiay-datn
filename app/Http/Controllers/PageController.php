@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use App\Product;
 use App\ProductProperties;
 use App\Category;
@@ -25,7 +22,6 @@ use App\Jobs\SendActivationMail;
 use App\Jobs\SendBillInfoMail;
 use App\Http\Requests\CustomerRequest;
 use App\Http\Requests\UserRequest;
-use App\Notifications\checkoutNoti;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -143,7 +139,7 @@ class PageController extends Controller
         $list_soil_out = "";
         foreach (Cart::content() as $row) {
             $rowId = $row->rowId;
-            $product_per = ProductProperties::where('product_id', $row->id)->where('size_id', $row->options->size_id)->select('quantity')->get()->first();
+            $product_per = ProductProperties::where('product_id', $row->id)->where('size_id', $row->options->size_id)->select('quantity')->first();
             $quantity_repository = $product_per->quantity;
             //Nếu số lượng trong kho bằng 0 thì xóa sản phẩm đó ra khỏi cart
             if ($quantity_repository == 0) {
@@ -213,7 +209,7 @@ class PageController extends Controller
                         $quantity_remain = $quantity - $cart->qty;
 
                         //cập nhật lại số lượng hàng trong kho
-                        $quantity = DB::table('product_properties')->where('product_id', $cart->id)->where('size_id', $cart->options->size_id)->update(['quantity' => $quantity_remain]);
+                        $quantity = ProductProperties::where('product_id', $cart->id)->where('size_id', $cart->options->size_id)->update(['quantity' => $quantity_remain]);
 
                     }
                     dispatch(new SendBillInfoMail($customer, Cart::content(), $total_price, $coupon_value));
@@ -225,7 +221,7 @@ class PageController extends Controller
                     $bill = Bills::find($bill_id);
 
                     // send notification
-                    \Notification::send($users, (new checkoutNoti($bill))->delay($when));
+//                    \Notification::send($users, (new checkoutNoti($bill))->delay($when));
 
                     Cart::destroy();
                     session()->forget('coupon');

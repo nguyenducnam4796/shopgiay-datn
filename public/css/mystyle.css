@@ -1416,3 +1416,12 @@ p.login-title{
 .p__total_item span{
     font-weight: 600;
 }
+
+input.has-error {
+    border-color: #a94442;
+    padding-right: 42.5px;
+}
+
+label.has-error {
+    color: #a94442;
+}

@@ -40,8 +40,9 @@
 								<?php $stt = 1; ?>
 							
 								@foreach($customers as $index => $customer)
-									
-									<?php $bill = $customer->bill; ?>
+                                    @if (empty($bill = $customer->bill))
+                                        @continue
+                                    @endif
 									<tr>
 										<td>{{ $index + $customers->firstItem() }}</td>
 										<td>{{ date('d-m-Y', strtotime($bill->created_at)) }}</td>
