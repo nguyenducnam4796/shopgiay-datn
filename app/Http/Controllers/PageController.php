@@ -50,11 +50,29 @@ class PageController extends Controller
         return view('user.profile', compact('full_name', 'user_name'));
     }
 
-    public function getIndexPage()
+    public function getIndexPage(Request $request)
     {
-        $new_product = Product::where('new', 1)->select('id', 'name', 'slug_name', 'image_product', 'unit_price', 'promotion_price', 'new')->limit(5)->orderBy('id', 'desc')->get();
+        $new_product = Product::where('new', 1)->select('id', 'name', 'slug_name', 'image_product', 'unit_price', 'promotion_price', 'new');
 
-        $sale_product = Product::where('promotion_price', '>', 0)->select('id', 'name', 'slug_name', 'image_product', 'unit_price', 'promotion_price', 'new')->limit(5)->orderBy('id', 'desc')->get();
+        if (!empty($keyword = $request->keyword)) {
+            $new_product = $new_product->where('name', 'LIKE', "%{$keyword}%")
+                ->orWhere('promotion_price', 'LIKE', "{$keyword}%")
+                ->orWhere('unit_price', 'LIKE', "{$keyword}%");
+        }
+
+        $new_product = $new_product->limit(5)->orderBy('id', 'desc')->get();
+
+
+
+        $sale_product = Product::where('promotion_price', '>', 0)->select('id', 'name', 'slug_name', 'image_product', 'unit_price', 'promotion_price', 'new');
+
+        if (!empty($keyword = $request->keyword)) {
+            $sale_product = $sale_product->where('name', 'LIKE', "%{$keyword}%")
+                ->orWhere('promotion_price', 'LIKE', "{$keyword}%")
+                ->orWhere('unit_price', 'LIKE', "{$keyword}%");
+        }
+
+        $sale_product = $sale_product->limit(5)->orderBy('id', 'desc')->get();
 
         return view('page.index', compact('new_product', 'sale_product'));
     }

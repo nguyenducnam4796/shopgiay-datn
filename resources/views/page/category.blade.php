@@ -1,14 +1,5 @@
 @extends('layout.master')
 
-@section('stylesheet')
-    <style type="text/css">
-        .mark, mark {
-            padding: 0;
-            background-color: orange;
-        }
-    </style>
-@endsection
-
 @section('content')
     <div id='wrapper'>
         <div class="row">
@@ -135,13 +126,8 @@
     {{$cate->name}}
 @endsection
 @section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js"></script>
-
     <script type="text/javascript">
         $(document).ready(function () {
-            /*== Text mark when search ==*/
-            $(".product-title, .product-price").mark("{{request()->keyword}}");
-
             var cate_id = $(".options__checkbox").attr('data-cate-id');
             var data = {
                 cate_id: cate_id,

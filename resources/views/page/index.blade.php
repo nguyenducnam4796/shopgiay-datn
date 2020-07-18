@@ -14,8 +14,9 @@
 							<div class="thumbnail">
 								@if($np->promotion_price > 0 )
 								<span class="badge badge--sale"><span>Sale</span></span>
-								@endif
+								@else
 						   		<span class="badge badge--new"><span>New</span></span>
+								@endif
 						      	<a href="san-pham/{{$np->id}}/{{$np->slug_name}}.html"><img src="{{asset('uploaded/product/' . $np->image_product)}}" alt="..."></a>
 						     	<div class="product-caption text-left">
 						        	<p class='product-title'><a href="">{{$np->name}}</a></p>
@@ -52,8 +53,9 @@
 								<div class="thumbnail">
 									@if($sp->new == 1)
 										<span class="badge badge--new"><span>New</span></span>
-									@endif
+									@else
 									<span class="badge badge--sale"><span>Sale</span></span>
+									@endif
 									<a href="san-pham/{{$sp->id}}/{{$sp->slug_name}}.html"><img src="{{asset('uploaded/product/' . $sp->image_product)}}" alt="..."></a>
 									<div class="product-caption text-left">
 										<p class='product-title'><a href="">{{$sp->name}}</a></p>

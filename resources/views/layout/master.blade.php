@@ -14,6 +14,13 @@
 	<!-- <link rel="stylesheet" type="text/css" href="asset/font-awesome/css/fontawesome-all.min.css"> --> <!--not full icon-->
 
 	@yield('stylesheet')
+
+	<style type="text/css">
+		.mark, mark {
+			padding: 0;
+			background-color: orange;
+		}
+	</style>
 </head>
 <body>
 	<div class="loading-icon">
@@ -29,6 +36,7 @@
 	<script type="text/javascript" src='js/jquery.min.js'></script>
 	<script type="text/javascript" src='js/bootstrap.min.js'></script>
 	<script src='js/elevatezoom/jquery.elevatezoom.js'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js"></script>
 	<script type="text/javascript" src='js/myscript.js'></script>
 	
 		@yield('script')
@@ -38,6 +46,9 @@
 		    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		  }
 		});
+
+		/*== Text mark when search ==*/
+		$(".product-title, .product-price").mark("{{request()->keyword}}");
 	</script>
 
 </body>

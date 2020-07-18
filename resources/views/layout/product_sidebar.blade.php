@@ -1,7 +1,7 @@
 <div class="col-12 col-sm-2 col-md-2 col-lg-2 nav-left small--text-center">
     <hr class="hr--border-top small-hidden"></hr>
     @include('layout.sider_nav')
-    <div class="options__checkbox" data-cate-id={{$cate->id}}>
+    {{--<div class="options__checkbox" data-cate-id={{$cate->id}}>
         <div class="brand__checkbox check__group clearfix" id='price-checkbox'>
             <h6>Giá</h6>
             <label class="check_label">Dưới 500.000 vnđ
@@ -47,5 +47,5 @@
                 @endforeach
             @endif
         </div>
-    </div>
+    </div>--}}
 </div>
