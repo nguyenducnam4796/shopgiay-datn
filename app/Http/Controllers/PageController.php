@@ -285,6 +285,7 @@ class PageController extends Controller
     {
         if (Auth::check()) {
             Auth::logout();
+            session()->flush();
         }
         return redirect('/');
     }

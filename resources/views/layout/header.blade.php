@@ -8,7 +8,8 @@
     </div>
     <div class="col-md-6 top-bar-right">
         <ul class="nav justify-content-end">
-            <li class="nav-item cart-link">
+            @if(Auth::check())
+                <li class="nav-item cart-link">
                 <a class="nav-link cart-select" href="javascript:void(0)"><span
                             class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng <span class="cart__count">@if(Cart::count() > 0)
                             ({{Cart::count()}}) @endif</span></a>
@@ -71,7 +72,6 @@
                 </div>
                 <!-- end-cart-body-->
             </li>
-            @if(Auth::check())
                 <li class="nav-item login-link">
                     <a class="nav-link show-user-nav"
                        href="javascript:void(0)">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</a>
